@@ -1,11 +1,3 @@
-# Jets Project
+# Testing Jets s3_event job
 
-This README would normally document whatever steps are necessary to get the application up and running.
-
-Things you might want to cover:
-
-* Dependencies
-* Configuration
-* Database setup
-* How to run the test suite
-* Deployment instructions
+Simple Jets app that successfully deploys with an s3_event bucket
