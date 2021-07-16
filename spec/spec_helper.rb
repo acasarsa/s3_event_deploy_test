@@ -1,26 +1,27 @@
-ENV['JETS_TEST'] = "1"
-ENV['JETS_ENV'] ||= "test"
+# frozen_string_literal: true
+
+ENV['JETS_TEST'] = '1'
+ENV['JETS_ENV'] ||= 'test'
 # Ensures aws api never called. Fixture home folder does not contain ~/.aws/credentails
-ENV['HOME'] = "spec/fixtures/home"
+ENV['HOME'] = 'spec/fixtures/home'
 
-require "byebug"
-require "fileutils"
-require "jets"
+require 'byebug'
+require 'fileutils'
+require 'jets'
 
-abort("The Jets environment is running in production mode!") if Jets.env == "production"
+abort('The Jets environment is running in production mode!') if Jets.env == 'production'
 Jets.boot
 
-require "jets/spec_helpers"
+require 'jets/spec_helpers'
 
 require 'capybara/rspec'
 Capybara.app = Jets.application
 # Capybara.current_driver = :selenium
 # Capybara.app_host = 'http://localhost:8888'
 
-
 module Helpers
   def payload(name)
-    JSON.load(IO.read("spec/fixtures/payloads/#{name}.json"))
+    JSON.parse(IO.read("spec/fixtures/payloads/#{name}.json"))
   end
 end
 

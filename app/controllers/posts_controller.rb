@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :delete]
+  before_action :set_post, only: %i[show edit update delete]
 
   # GET /posts
   def index
@@ -7,8 +9,7 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/1
-  def show
-  end
+  def show; end
 
   # GET /posts/new
   def new
@@ -16,8 +17,7 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /posts
   def create
@@ -25,7 +25,7 @@ class PostsController < ApplicationController
 
     if @post.save
       if request.xhr?
-        render json: {success: true, location: url_for(@post)}
+        render json: { success: true, location: url_for(@post) }
       else
         redirect_to post_path(@post)
       end
@@ -38,7 +38,7 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       if request.xhr?
-        render json: {success: true, location: url_for(@post)}
+        render json: { success: true, location: url_for(@post) }
       else
         redirect_to post_path(@post)
       end
@@ -51,13 +51,14 @@ class PostsController < ApplicationController
   def delete
     @post.destroy
     if request.xhr?
-      render json: {success: true}
+      render json: { success: true }
     else
       redirect_to posts_path
     end
   end
 
-private
+  private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
